@@ -4,8 +4,8 @@ simbolos = {
     "centenas": ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"],
     "millares": ["","M", "MM", "MMM"] }
 
-def validar (n):                                            # restricciones: 0 < n < 4000, que sea un entero
-    if not isinstance(n, int):                                  # para comprobar el dato, "n" el dato que ponemos e "int" que debe comprobar
+def validar (n):                                           
+    if not isinstance(n, int): # para comprobar el dato, "n" el dato que ponemos e "int" que debe comprobar
         raise ValueError("{} debe ser un entero".format(n)) # lanzamos una excepcion
     if 0 > n or n > 3999:
         raise ValueError("{} debe estar entre 0 y 3999".format(n))
@@ -34,8 +34,8 @@ def a_romano(n):
     if len(c) >= 4:
        millares = int(c[-4])
 
-    componentes = (millares, centenas, decenas, unidades)
+    # componentes = (millares, centenas, decenas, unidades)
 
-    return simbolos["millares"][millares] + simbolos["centenas"][centenas]
+    return simbolos["millares"][millares] + simbolos["centenas"][centenas] + simbolos["decenas"][decenas] + simbolos["unidades"][unidades]
 
   
