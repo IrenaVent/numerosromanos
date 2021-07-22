@@ -50,3 +50,11 @@ class RomanosTests(unittest.TestCase):
     def test_no_restas_consecutivos(self):
         with self.assertRaises(ValueError):
              a_numero("IXC")
+
+    def test_no_repeticiones_cincos(self):
+        with self.assertRaises(ValueError):
+            a_numero("DD")
+        with self.assertRaises(ValueError):
+            a_numero("MDDLL")
+        with self.assertRaises(ValueError):
+            a_numero("MDLLL")
