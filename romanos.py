@@ -4,25 +4,39 @@ simbolos = {
     "centenas": ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"],
     "millares": ["","M", "MM", "MMM"] }
 
-digitos_romanos = {
-    "I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
+digitos_romanos = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
 
 def a_numero (cadena):
     acumulador = 0
     valor_ant = 0
+    cuenta_repes = 0
     for caracter in cadena:
-        valor = digitos_romanos[caracter]
+        valor = digitos_romanos.get(caracter)
+        
+        if not valor:
+            raise ValueError("El mío")
+
         if valor > valor_ant:
+            if cuenta_repes > 0:
+                raise ValueError("No se puede restar dentro de repeticiones")
+
             if valor_ant in (5,50,500):
                 raise ValueError("No se pueden restrar V, L o D")
             
-            if valor_ant > 0 or valor > 10 * valor_ant:
+            if valor_ant > 0 and valor > 10 * valor_ant:
                 raise ValueError("No se pueden restas entre digitos 10veces mayores")
             
             acumulador = acumulador - valor_ant
             acumulador = acumulador + valor - valor_ant
         else:
             acumulador += valor
+
+        if valor == valor_ant:
+            cuenta_repes += 1
+            if cuenta_repes == 3: 
+                raise ValueError("Demsiadas repeticiones de {}".format(caracter))
+        else:
+            cuenta_repes = 0 
         
         valor_ant = valor
 
@@ -32,7 +46,7 @@ def validar (n):
     if not isinstance(n, int): # para comprobar el dato, "n" el dato que ponemos e "int" que debe comprobar
         raise ValueError("{} debe ser un entero".format(n)) 
         # lanzamos una excepcion
-    if 0 > n or n > 3999:
+    if n < 0 or n > 3999:
         raise ValueError("{} debe estar entre 0 y 3999".format(n))
 
 
