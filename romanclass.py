@@ -1,17 +1,55 @@
 class RomanNumber():
-    def __init__(self,valor):
+    simbolos = {
+        "unidades": ["","I","II","III","IV","V","VI","VII","VIII","IX"],
+        "decenas": ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"],
+        "centenas": ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"],
+        "millares": ["","M", "MM", "MMM"] }
+    
+    digitos_romanos = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
+
+    def __init__(self,valor):    
         
-        if isinstance(valor, int): # comprobarción
-            self.valor = valor # atricubto valor: {"valor": 2}
-            self.cadena = a_romano(valor) # atributo cadena{"cadena":"II"} -> convertir valor en cadena 
-   
-    def a_numero (cadena):
+        if isinstance(valor, int):
+            self.valor = valor 
+            self.cadena = self.a_romano() 
+
+        if isinstance(valor, str):
+            self.cadena = valor 
+            self.valor = self.a_numero()
+
+    def validar (self):                                           
+        if not isinstance(self.valor, int): # para comprobar el dato, "n" el dato que ponemos e "int" que debe comprobar
+            raise ValueError("{} debe ser un entero".format(self.valor)) 
+            # lanzamos una excepcion
+        if self.valor < 0 or self.valor > 3999:
+            raise ValueError("{} debe estar entre 0 y 3999".format(self.valor))
+
+    def a_romano(self):
+
+        self.validar()
+        c = str (self.valor)
+
+        unidades = decenas = centenas = millares = 0
+
+        if len(c) >= 1:
+            unidades = int(c[-1])
+        if len(c) >= 2:
+            decenas = int(c[-2])
+        if len(c) >= 3:
+            centenas = int(c[-3])
+        if len(c) >= 4:
+            millares = int(c[-4])
+
+        return self.simbolos["millares"][millares] + self.simbolos["centenas"][centenas] + self.simbolos["decenas"][decenas] + self.simbolos["unidades"][unidades]
+        
+    def a_numero (self):
+
         acumulador = 0
         valor_ant = 0
         cuenta_repes = 0
         resta = 0
         for caracter in self.cadena:
-            valor = digitos_romanos.get(caracter)
+            valor = self.digitos_romanos.get(caracter)
             
             if not valor:
                 raise ValueError("El mío")
@@ -49,28 +87,25 @@ class RomanNumber():
 
         return acumulador
 
-    def validar (self,n):                                           
-        if not isinstance(n, int): # para comprobar el dato, "n" el dato que ponemos e "int" que debe comprobar
-            raise ValueError("{} debe ser un entero".format(n)) 
-            # lanzamos una excepcion
-        if n < 0 or n > 3999:
-            raise ValueError("{} debe estar entre 0 y 3999".format(n))
+# métodos mágico:
 
-    def a_romano(self):
+    def __str__(self):
+        return (f"Soy el número {self.cadena}")
+    
+    def __repr__(self):
+        return self.__str__()
+    
+    def __len__(self):
+        return len(sel.cadena)
+    
+    def __eq__(self, other):
+        if isinstance(other, RomanNumber):
+            return self.valor == other.valor
+        if isinstance(other, int):
+            return self.valor == other
+        if isinstance(other, float):
+            return self.valor == other
+        if isinstance(other, str):
+            return self.cadena == other
+        raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
 
-        self.validar (self.valor)
-        c = str (n)
-
-        unidades = decenas = centenas = millares = 0
-
-        if len(c) >= 1:
-            unidades = int(c[-1])
-        if len(c) >= 2:
-            decenas = int(c[-2])
-        if len(c) >= 3:
-            centenas = int(c[-3])
-        if len(c) >= 4:
-            millares = int(c[-4])
-
-        return simbolos["millares"][millares] + simbolos["centenas"][centenas] + simbolos["decenas"][decenas] + simbolos["unidades"][unidades]
-        

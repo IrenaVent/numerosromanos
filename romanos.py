@@ -58,7 +58,6 @@ def validar (n):
     if n < 0 or n > 3999:
         raise ValueError("{} debe estar entre 0 y 3999".format(n))
 
-
 def a_romano(n):
 
     # después descomponer 
