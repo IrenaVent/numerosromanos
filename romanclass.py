@@ -13,9 +13,12 @@ class RomanNumber():
             self.valor = valor 
             self.cadena = self.a_romano() 
 
-        if isinstance(valor, str):
+        elif isinstance(valor, str):
             self.cadena = valor 
             self.valor = self.a_numero()
+        
+        else:
+            raise ValueError ("Solo admite int y cadena")
 
     def validar (self):                                           
         if not isinstance(self.valor, int): # para comprobar el dato, "n" el dato que ponemos e "int" que debe comprobar
@@ -87,12 +90,12 @@ class RomanNumber():
 
         return acumulador
 
-# métodos mágico:
+# métodos mágicos:
 
-    def __str__(self):
+    def __str__(self): # método para transfromar en cadena tu clase
         return (f"Soy el número {self.cadena}")
     
-    def __repr__(self):
+    def __repr__(self): # método para ver el contenido/representación de la clase, llama a str
         return self.__str__()
     
     def __len__(self):
@@ -109,3 +112,20 @@ class RomanNumber():
             return self.cadena == other
         raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
 
+    def __ne__(self, other):
+        if isinstance(other, RomanNumber):
+            return other.valor != self.valor
+        if isinstance(other, int):
+            return self.valor != other
+        if isinstance(other, float):
+            return self.valor != other
+        if isinstance(other, str):
+            return self.cadena != other
+        raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
+
+    def __gt__(self, other):
+        if isinstance(other, RomanNumber):
+            return other.valor > self.valor
+            # terminar código...vídeo del día 26 de Julio de 2021
+    
+    #  lt / le / add / radd y resto de operadores divisiones, etc.
