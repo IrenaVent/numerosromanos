@@ -125,7 +125,79 @@ class RomanNumber():
 
     def __gt__(self, other):
         if isinstance(other, RomanNumber):
-            return other.valor > self.valor
-            # terminar código...vídeo del día 26 de Julio de 2021
+            return self.valor > other.valor
+        if isinstance(other, int):
+            return self.valor > other
+        if isinstance(other, float):
+            return self.valor > other
+        if isinstance(other, str):
+            return self.valor > RomanNumber(other).valor
+        raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
+
+    def __ge__(self, other):
+        if isinstance(other, RomanNumber):
+            return self.valor >= other.valor
+        if isinstance(other, int):
+            return self.valor >= other
+        if isinstance(other, float):
+            return self.valor >= other
+        if isinstance(other, str):
+            return self.valor >= RomanNumber(other).valor
+        raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
+
+    def __lt__(self, other):
+        if isinstance(other, RomanNumber):
+            return self.valor < other.valor
+        if isinstance(other, int):
+            return self.valor < other
+        if isinstance(other, float):
+            return self.valor < other
+        if isinstance(other, str):
+            return self.valor < RomanNumber(other).valor
+        raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
+
+    def __le__(self, other):
+        if isinstance(other, RomanNumber):
+            return self.valor <= other.valor
+        if isinstance(other, int):
+            return self.valor <= other
+        if isinstance(other, float):
+            return self.valor <= other
+        if isinstance(other, str):
+            return self.valor <= RomanNumber(other).valor
+        raise ValueError(f"{other} solo puede ser RomanNumber, int, float o str")
+
+    def __add__(self, other):
+        if isinstance(other, RomanNumber):
+            return RomanNumber(self.valor + other.valor)
+        if isinstance(other, int):
+            return RomanNumber(self.valor + other)
+        if isinstance(other, float):
+            raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
+        if isinstance(other, str):
+            return RomanNumber(self.valor + RomanNumber(other).valor)
+        raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
     
-    #  lt / le / add / radd y resto de operadores divisiones, etc.
+    def __radd__(self, other): #suma reversa
+        return self.__add__(other)
+
+
+    def __sub__(self, other):
+        if isinstance(other, RomanNumber):
+            return RomanNumber(self.valor - other.valor)
+        if isinstance(other, int):
+            return RomanNumber(self.valor - other)
+        if isinstance(other, float):
+            raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
+        if isinstance(other, str):
+            return RomanNumber(self.valor - RomanNumber(other).valor)
+        raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
+
+    def __rsub__(self, other): #resta reversa
+        if isinstance(other, int):
+            return RomanNumber((self.valor - other)* -1)
+        elif isinstance(other, str):
+            return RomanNumber((self.valor - RomanNumber(other).valor)* -1)
+        else:
+            return self.__sub__(other)
+        
