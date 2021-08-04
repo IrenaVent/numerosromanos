@@ -92,6 +92,18 @@ class RomanNumberClassTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             RomanNumber(2) - 1.3
             RomanNumber(2) - {}
+            2 - RomanNumber(1)
+
+        # __sub__
+        self.assertEqual(RomanNumber(2), dos * 1)
+        self.assertEqual(RomanNumber(2), dos * uno)
+        self.assertEqual(RomanNumber(2), dos * "I")
+        self.assertEqual(RomanNumber(2), 2 * uno)
+        self.assertEqual(RomanNumber(2), "II" * uno)
+        with self.assertRaises(ValueError):
+            RomanNumber(2) * 1.3
+            RomanNumber(2) * {}
+            RomanNumber(2) * -4
 
     
 

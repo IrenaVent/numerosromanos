@@ -200,4 +200,43 @@ class RomanNumber():
             return RomanNumber((self.valor - RomanNumber(other).valor)* -1)
         else:
             return self.__sub__(other)
-        
+
+    def __mul__(self,other):
+        if isinstance(other, RomanNumber):
+            return RomanNumber(self.valor * other.valor)
+        if isinstance(other, int):
+            return RomanNumber(self.valor * other)
+        if isinstance(other, float):
+            raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
+        if isinstance(other, str):
+            return RomanNumber(self.valor * RomanNumber(other).valor)
+        raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
+    
+    def __rmul__(self, other): #división verdadera reversa
+        return self.__mul__(other)
+
+
+
+    def __truediv__(self, other):
+        print ("-----------------")
+        division = self.valor / other.valor
+        divisionentero = int(self.valor / other.valor)
+        if isinstance(other, RomanNumber) and division == divisionentero: 
+           return RomanNumber (divisionentero)
+        else:
+           return RomanNumber (self.valor / other.valor)
+
+
+
+        if isinstance(other, int):
+            return RomanNumber(self.valor / other)
+        if isinstance(other, float):
+            raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
+        if isinstance(other, str):
+            return RomanNumber(self.valor / RomanNumber(other).valor)
+        raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
+    
+    
+
+
+    
