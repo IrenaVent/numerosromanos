@@ -117,6 +117,27 @@ class RomanNumberClassTest(unittest.TestCase):
             RomanNumber(2) / {}
             RomanNumber(2) / -4
 
+        # __floordiv__
+        self.assertEqual(RomanNumber(2), cinco // 2)
+        self.assertEqual(RomanNumber(2), cinco // dos)
+        self.assertEqual(RomanNumber(2), cinco // "II")
+        self.assertEqual(RomanNumber(2), 5 // dos)
+        self.assertEqual(RomanNumber(2), "V" // dos)
+        with self.assertRaises(ValueError):
+            RomanNumber(2) // 1.3
+            RomanNumber(2) // {}
+            RomanNumber(2) // -4
+        
+        # __mod__
+        self.assertEqual(RomanNumber(1), cinco % 2)
+        self.assertEqual(RomanNumber(1), cinco % dos)
+        self.assertEqual(RomanNumber(1), cinco % "II")
+        self.assertEqual(RomanNumber(1), 5 % dos)
+        self.assertEqual(RomanNumber(1), "V" % dos)
+        with self.assertRaises(ValueError):
+            RomanNumber(2) % 1.3
+            RomanNumber(2) % {}
+            RomanNumber(2) % -4
     
 
 

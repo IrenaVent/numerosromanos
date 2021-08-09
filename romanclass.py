@@ -244,20 +244,46 @@ class RomanNumber():
             return self.__truediv__(other)
         else: 
             return self.__truediv__(other)
+    
+    def __floordiv__(self, other): #división entera
+        if isinstance(other, RomanNumber): 
+           return RomanNumber(self.valor // other.valor)
+        if isinstance(other, int):
+            return RomanNumber(self.valor // other)
+        if isinstance(other, float):
+            raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
+        if isinstance(other, str):
+            return RomanNumber(self.valor // RomanNumber(other).valor)
+        raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
 
-
-#    def __rtruediv__(self, other): #división reversa
-        
-#         def changevalue (self, other):
-#             other = RomanNumber(other)
-#             varchange = self
-#             self = other
-#             other = varchange
-#             return other
-
-#         if isinstance(other, int):
-#             return self.__truediv__(changevalue(self, other))
-#         elif isinstance(other, str):
-#             return self.__truediv__(changevalue(self, other))
-#         else: 
-#             return self.__truediv__(other)
+    def __rfloordiv__(self, other): #división entera reversa
+        if isinstance(other, int) or isinstance(other, str):
+            other = RomanNumber(other)
+            varchange = self
+            self = other
+            other = varchange
+            return self.__floordiv__(other)
+        else: 
+            return self.__floordiv__(other)
+    
+    def __mod__(self, other): #algoritmo módulo
+        if isinstance(other, RomanNumber): 
+           return RomanNumber(self.valor % other.valor)
+        if isinstance(other, int):
+            return RomanNumber(self.valor % other)
+        if isinstance(other, float):
+            raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
+        if isinstance(other, str):
+            return RomanNumber(self.valor % RomanNumber(other).valor)
+        raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
+    
+    def __rmod__(self, other): #módulo reversa
+        print ("soy el other", other)
+        if isinstance(other, int) or isinstance(other, str):
+            other = RomanNumber(other)
+            varchange = self
+            self = other
+            other = varchange
+            return self.__mod__(other)
+        else: 
+            return self.__mod__(other)
