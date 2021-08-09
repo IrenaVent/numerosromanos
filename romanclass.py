@@ -215,17 +215,8 @@ class RomanNumber():
     def __rmul__(self, other): #multiplicación verdadera reversa
         return self.__mul__(other)
 
-
-
-    # def __truediv__(self, other):
-    #     valor = checkdiv(self, other)
-    #     if isinstance(other, RomanNumber):
-    #        return RomanNumber (valor)
-    #     else:
-    #        return RomanNumber (self.valor / other.valor)
-
     def __truediv__(self, other):
-       
+        
         def checkdiv(a, b):
             subs = a / b
             if subs == int(subs):
@@ -233,29 +224,40 @@ class RomanNumber():
                 return intsubs
             else:
                 return subs
-    
+       
         if isinstance(other, RomanNumber): 
            return RomanNumber (checkdiv(self.valor, other.valor))
-
-
-
         if isinstance(other, int):
-            return RomanNumber(self.valor / other)
+            return RomanNumber(checkdiv(self.valor, other))
         if isinstance(other, float):
             raise ValueError(f"{other} solo puede ser RomanNumber, int, o str")
         if isinstance(other, str):
-            return RomanNumber(self.valor / RomanNumber(other).valor)
+            return RomanNumber(checkdiv(self.valor, RomanNumber(other).valor))
         raise ValueError(f"{other} solo puede ser RomanNumber, int o str")
-    
 
-    # def __truediv__(self, other):
-    #     print ("-----------------")
-    #     division = self.valor / other.valor
-    #     divisionentero = int(self.valor / other.valor)
-    #     if isinstance(other, RomanNumber) and division == divisionentero: 
-    #        return RomanNumber (divisionentero)
-    #     else:
-    #        return RomanNumber (self.valor / other.valor)
+    def __rtruediv__(self, other): #división reversa
+        if isinstance(other, int) or isinstance(other, str):
+            other = RomanNumber(other)
+            varchange = self
+            self = other
+            other = varchange
+            return self.__truediv__(other)
+        else: 
+            return self.__truediv__(other)
 
 
-    
+#    def __rtruediv__(self, other): #división reversa
+        
+#         def changevalue (self, other):
+#             other = RomanNumber(other)
+#             varchange = self
+#             self = other
+#             other = varchange
+#             return other
+
+#         if isinstance(other, int):
+#             return self.__truediv__(changevalue(self, other))
+#         elif isinstance(other, str):
+#             return self.__truediv__(changevalue(self, other))
+#         else: 
+#             return self.__truediv__(other)

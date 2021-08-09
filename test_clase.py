@@ -70,6 +70,7 @@ class RomanNumberClassTest(unittest.TestCase):
     def test_metodos_magicos_aritmeticos(self):
         uno = RomanNumber(1)
         dos = RomanNumber(2)
+        cinco = RomanNumber(5)
 
         # __add__
         self.assertEqual(RomanNumber(2), uno + 1)
@@ -104,6 +105,17 @@ class RomanNumberClassTest(unittest.TestCase):
             RomanNumber(2) * 1.3
             RomanNumber(2) * {}
             RomanNumber(2) * -4
+
+        # __truediv__
+        self.assertEqual(RomanNumber(2), dos / 1)
+        self.assertEqual(RomanNumber(2), dos / uno)
+        self.assertEqual(RomanNumber(2), dos / "I")
+        self.assertEqual(RomanNumber(5), 10 / dos)
+        self.assertEqual(RomanNumber(2), "II" / uno)
+        with self.assertRaises(ValueError):
+            RomanNumber(2) / 1.3
+            RomanNumber(2) / {}
+            RomanNumber(2) / -4
 
     
 
