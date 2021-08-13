@@ -73,71 +73,71 @@ class RomanNumberClassTest(unittest.TestCase):
         cinco = RomanNumber(5)
 
         # __add__
-        self.assertEqual(RomanNumber(2), uno + 1)
-        self.assertEqual(RomanNumber(2), uno + uno)
-        self.assertEqual(RomanNumber(2), uno + "I")
+        self.assertEqual(dos, uno + 1)
+        self.assertEqual(dos, uno + uno)
+        self.assertEqual(dos, uno + "I")
         # self.assertEqual(RomanNumber(2), uno += 1)
-        self.assertEqual(RomanNumber(2), 1 + uno)
-        self.assertEqual(RomanNumber(2), "I" + uno)
+        self.assertEqual(dos, 1 + uno)
+        self.assertEqual(dos, "I" + uno)
         with self.assertRaises(ValueError):
-            RomanNumber(1) + 1.3
-            RomanNumber(1) + {}
+            uno + 1.3
+            uno + {}
 
         # __sub__
-        self.assertEqual(RomanNumber(1), dos - 1)
-        self.assertEqual(RomanNumber(1), dos - uno)
-        self.assertEqual(RomanNumber(1), dos - "I")
-        self.assertEqual(RomanNumber(1), 2 - uno)
-        self.assertEqual(RomanNumber(1), "II" - uno)
+        self.assertEqual(uno, dos - 1)
+        self.assertEqual(uno, dos - uno)
+        self.assertEqual(uno, dos - "I")
+        self.assertEqual(uno, 2 - uno)
+        self.assertEqual(uno, "II" - uno)
         # self.assertEqual(RomanNumber(1), dos -= 1)
         with self.assertRaises(ValueError):
-            RomanNumber(2) - 1.3
-            RomanNumber(2) - {}
-            2 - RomanNumber(1)
+            dos - 1.3
+            dos - {}
+            2 - uno
 
         # __sub__
-        self.assertEqual(RomanNumber(2), dos * 1)
-        self.assertEqual(RomanNumber(2), dos * uno)
-        self.assertEqual(RomanNumber(2), dos * "I")
-        self.assertEqual(RomanNumber(2), 2 * uno)
-        self.assertEqual(RomanNumber(2), "II" * uno)
+        self.assertEqual(dos, dos * 1)
+        self.assertEqual(dos, dos * uno)
+        self.assertEqual(dos, dos * "I")
+        self.assertEqual(dos, 2 * uno)
+        self.assertEqual(dos, "II" * uno)
         with self.assertRaises(ValueError):
-            RomanNumber(2) * 1.3
-            RomanNumber(2) * {}
-            RomanNumber(2) * -4
+            dos * 1.3
+            dos * {}
+            dos * -4
 
         # __truediv__
-        self.assertEqual(RomanNumber(2), dos / 1)
-        self.assertEqual(RomanNumber(2), dos / uno)
-        self.assertEqual(RomanNumber(2), dos / "I")
-        self.assertEqual(RomanNumber(5), 10 / dos)
-        self.assertEqual(RomanNumber(2), "II" / uno)
+        self.assertEqual(dos, dos / 1)
+        self.assertEqual(dos, dos / uno)
+        self.assertEqual(dos, dos / "I")
+        self.assertEqual(cinco, 10 / dos)
+        self.assertEqual(dos, "II" / uno)
         with self.assertRaises(ValueError):
-            RomanNumber(2) / 1.3
-            RomanNumber(2) / {}
-            RomanNumber(2) / -4
+            dos / 1.3
+            dos / {}
+            dos / -4
 
         # __floordiv__
-        self.assertEqual(RomanNumber(2), cinco // 2)
-        self.assertEqual(RomanNumber(2), cinco // dos)
-        self.assertEqual(RomanNumber(2), cinco // "II")
-        self.assertEqual(RomanNumber(2), 5 // dos)
-        self.assertEqual(RomanNumber(2), "V" // dos)
+        self.assertEqual(dos, cinco // 2)
+        self.assertEqual(dos, cinco // dos)
+        self.assertEqual(dos, cinco // "II")
+        self.assertEqual(dos, 5 // dos)
+        self.assertEqual(dos, "V" // dos)
         with self.assertRaises(ValueError):
-            RomanNumber(2) // 1.3
-            RomanNumber(2) // {}
-            RomanNumber(2) // -4
+            dos // 1.3
+            dos // {}
+            dos // -4
         
         # __mod__
-        self.assertEqual(RomanNumber(1), cinco % 2)
-        self.assertEqual(RomanNumber(1), cinco % dos)
-        self.assertEqual(RomanNumber(1), cinco % "II")
-        self.assertEqual(RomanNumber(1), 5 % dos)
-        self.assertEqual(RomanNumber(1), "V" % dos)
+        self.assertEqual(uno, cinco % 2)
+        self.assertEqual(uno, cinco % dos)
+        self.assertEqual(uno, cinco % "II")
+        self.assertEqual(uno, 5 % dos)
+        self.assertEqual(uno, "V" % dos) # error: not all arguments converted during string formatting / error de interpretación...falta resolver
         with self.assertRaises(ValueError):
-            RomanNumber(2) % 1.3
-            RomanNumber(2) % {}
-            RomanNumber(2) % -4
+            dos % 1.3
+            dos % {}
+            dos % -4
     
 
 
